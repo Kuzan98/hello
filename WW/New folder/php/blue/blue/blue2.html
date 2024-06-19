@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Background Color</title>
+    <style>
+        body {
+            background-color: <?php echo isset($_POST['color']) ? htmlspecialchars($_POST['color']) : '#ffffff'; ?>;
+        }
+    </style>
+</head>
+<body>
+    <form action="index.php" method="POST">
+        <label for="color">Choose background color:</label>
+        <input type="color" id="color" name="color" value="<?php echo isset($_POST['color']) ? htmlspecialchars($_POST['color']) : '#ffffff'; ?>">
+        <br><br>
+        <label for="password">Enter password:</label>
+        <input type="password" id="password" name="password">
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['password'])) {
+            $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            echo "<p>Hashed Password: $hashedPassword</p>";
+        }
+    }
+    ?>
+</body>
+</html>
